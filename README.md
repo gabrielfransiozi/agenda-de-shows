@@ -13,4 +13,17 @@
 | [Nome 3] | [@usuario3] |
 
 ## Arquitetura
-> *A ser preenchido na Aula 6*
+``` mermaid
+---
+config:
+  theme: mc
+---
+flowchart LR
+    A[Logar conta do Spotify] --> B[Escolher gênero favorito]
+    B --> C[Escolher localização]
+    C --> D{Escolher Show perto de você}
+    D --> Artista
+    D --> Localização
+    D --> Preço
+    D --> Data
+```
