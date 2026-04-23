@@ -1,0 +1,126 @@
+{
+  "name": "API shows",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "958234aa-0daf-4cdc-8af3-a0096743319a",
+      "name": "When chat message received",
+      "webhookId": "f1f0d74d-005a-4cd7-ad25-9cd0cfdd2c60"
+    },
+    {
+      "parameters": {
+        "url": "https://app.ticketmaster.com/discovery/v1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        432,
+        -144
+      ],
+      "id": "1eb7b496-b629-4e23-b16f-ca97b41ed734",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8f8c0e01-3e23-44c4-a60c-7cbca01fb638",
+              "leftValue": "Verdadeiro",
+              "rightValue": "Falso",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "783812f0-6a13-4e6b-9c9c-8d0ee9cff2b7",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        448,
+        112
+      ],
+      "id": "bbabbecd-6773-4a0f-b890-92175a348752",
+      "name": "Stop and Error"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "e73a2365-baec-4037-ba4b-03fd39d1b1f0",
+  "meta": {
+    "instanceId": "44f1311d5683dbe3323e5057f50f8e8b347c9e59bc0d5486a99117b7a958ea68"
+  },
+  "id": "aqJsXyo8N17HlJTf",
+  "tags": []
+}
